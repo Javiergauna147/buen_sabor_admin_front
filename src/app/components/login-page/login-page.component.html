@@ -1,1 +1,18 @@
-<p>login-page works!</p>
+<div class="w-6 mx-auto" style="margin-top: 25vh;">
+    <p-card header="Iniciar Sesión">
+        <form [formGroup]="loginForm" (ngSubmit)="submitform()">
+            <div class="p-fluid">
+                <div class="field">
+                    <label for="username">Email</label>
+                    <input pInputText id="username" type="text" formControlName="email" />
+                    <p *ngIf="emailInvalido" class="text-red-500">Formato de mail incorrecto</p>
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input pInputText id="password" type="password" formControlName="password" />
+                </div>
+                <p-button label="Login" type="submit" [disabled]="formularioInvalido"></p-button>
+            </div>
+        </form>
+    </p-card>
+</div>
