@@ -5,8 +5,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
-import { catchError, of } from 'rxjs';
 import { UsuarioResponse } from 'src/app/services/auth/auth.interface';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class LoginPageComponent {
     password: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   submitform(){
     let userPayload = {
@@ -39,15 +39,11 @@ export class LoginPageComponent {
 
     this.authService.login(userPayload).subscribe({
       next: (res: UsuarioResponse) => {
-        console.log("recontra logeado")
         this.authService.guardarToken(res.token);
+        this.router.navigate(['home']);
       },
-      error: () => {
-        console.log("logeo incorercto")
-      },
-      complete: () => {
-        console.log("finalizada llamada a la api")
-      }
+      error: (e) => {},
+      complete: () => {}
     });
   }
 
