@@ -1,1 +1,38 @@
-<p>insumos-page works!</p>
+<p-table
+    [value]="insumos"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} insumos"
+    [rowsPerPageOptions]="[10, 25, 50]"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:25%">Nombre</th>
+            <th style="width:25%">Denominacion</th>
+            <th style="width:25%">Marca</th>
+            <th style="width:25%">Stock</th>
+            <th style="width:25%">Stock Máximo</th>
+            <th style="width:25%">Stock Mínimo</th>
+            <th style="width:25%">Rubro</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-insumo>
+        <tr>
+            <td>{{ insumo.nombre }}</td>
+            <td>{{ insumo.denominacion }}</td>
+            <td>{{ insumo.marca }}</td>
+            <td>{{ insumo.stock }}</td>
+            <td>{{ insumo.stockMaximo }}</td>
+            <td>{{ insumo.stockMinimo }}</td>
+            <td>{{ insumo.rubro.nombre }}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-table>
