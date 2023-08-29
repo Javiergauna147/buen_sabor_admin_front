@@ -9,13 +9,14 @@
 >
     <ng-template pTemplate="header">
         <tr>
-            <th style="width:25%">Nombre</th>
-            <th style="width:25%">Denominacion</th>
-            <th style="width:25%">Marca</th>
-            <th style="width:25%">Stock</th>
-            <th style="width:25%">Stock Máximo</th>
-            <th style="width:25%">Stock Mínimo</th>
-            <th style="width:25%">Rubro</th>
+            <th>Nombre</th>
+            <th>Denominacion</th>
+            <th>Marca</th>
+            <th>Stock</th>
+            <th>Stock Máximo</th>
+            <th>Stock Mínimo</th>
+            <th>Rubro</th>
+            <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-insumo>
@@ -27,12 +28,12 @@
             <td>{{ insumo.stockMaximo }}</td>
             <td>{{ insumo.stockMinimo }}</td>
             <td>{{ insumo.rubro.nombre }}</td>
+            <td>{{ insumo.rubro.nombre }}</td>
+            <td>
+                <div class="flex align-items-center justify-content-center gap-2">
+                    <p-button pRipple type="button" icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
+                </div>
+            </td>
         </tr>
-    </ng-template>
-    <ng-template pTemplate="paginatorleft">
-        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-    </ng-template>
-    <ng-template pTemplate="paginatorright">
-        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-table>

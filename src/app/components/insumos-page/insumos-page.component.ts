@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 import { InsumosService } from 'src/app/services/insumos/insumos.service';
 import { Insumo } from 'src/app/services/insumos/insumos.interface';
 
@@ -12,7 +13,8 @@ import { Insumo } from 'src/app/services/insumos/insumos.interface';
   imports: [
     CommonModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    RippleModule
   ],
   templateUrl: './insumos-page.component.html',
   styleUrls: ['./insumos-page.component.scss']
