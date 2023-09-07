@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { InsumosService } from 'src/app/services/insumos/insumos.service';
 import { Insumo } from 'src/app/services/insumos/insumos.interface';
+import { EditarInsumoModalComponent } from './editar-insumo-modal/editar-insumo-modal.component';
 
 
 @Component({
@@ -14,12 +15,16 @@ import { Insumo } from 'src/app/services/insumos/insumos.interface';
     CommonModule,
     TableModule,
     ButtonModule,
-    RippleModule
+    RippleModule,
+    EditarInsumoModalComponent
   ],
   templateUrl: './insumos-page.component.html',
   styleUrls: ['./insumos-page.component.scss']
 })
 export class InsumosPageComponent implements OnInit {
+
+
+  @ViewChild(EditarInsumoModalComponent) editarInsumoModal: EditarInsumoModalComponent | undefined;
 
   insumos: Insumo[] = [];
 
@@ -31,6 +36,11 @@ export class InsumosPageComponent implements OnInit {
           this.insumos = insumos
         }
       })
+  }
+
+
+  editarInsumo(insumo: Insumo) {
+    this.editarInsumoModal?.editarInsumo.next(insumo);
   }
 
 }
