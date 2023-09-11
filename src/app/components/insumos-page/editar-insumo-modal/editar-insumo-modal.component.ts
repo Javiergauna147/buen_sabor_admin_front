@@ -4,6 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { Insumo } from '../../../services/insumos/insumos.interface';
 import { Subject } from 'rxjs';
+import { InsumosService } from 'src/app/services/insumos/insumos.service';
 
 
 
@@ -24,11 +25,21 @@ export class EditarInsumoModalComponent implements OnInit {
 
   modalVisible: boolean = false;
 
-  constructor(){}
+  insumo: Insumo | undefined;
+
+  constructor( private insumoService: InsumosService ){}
 
   ngOnInit(): void {
     this.editarInsumo.subscribe((insumo: Insumo) => {
       this.mostrarModal();
+      this.cargarInsumo(insumo._id);
+    })
+  }
+
+  cargarInsumo(id: string){
+    this.insumoService.getOneById(id).subscribe((insumo:Insumo) => {
+      console.log('insumo encontrado');
+      console.log(insumo)
     })
   }
 

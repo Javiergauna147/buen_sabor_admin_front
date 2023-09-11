@@ -17,4 +17,8 @@ export class InsumosService {
   getAll(): Observable<Insumo[]>{
     return this.http.get<Insumo[]>(`${this.urlInsumos}/find-all`)
   }
+
+  getOneById(id: string): Observable<Insumo>{
+    return this.http.get<Insumo>(`${this.urlInsumos}/find/${id}`)
+  }
 }
