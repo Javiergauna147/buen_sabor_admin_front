@@ -52,7 +52,7 @@ export class LoginPageComponent {
   }
 
   get formularioInvalido(): boolean {
-    return this,this.loginForm.invalid;
+    return this.loginForm.invalid;
   }
 
 }

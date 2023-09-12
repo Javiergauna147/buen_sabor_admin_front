@@ -1,11 +1,40 @@
 <p-dialog header="Header" [(visible)]="modalVisible" [draggable]="false" [modal]="true" [style]="{ width: '50vw' }" [closable]="false">
     <ng-template pTemplate="header">
-        <span class="text-xl font-bold">Header Content</span>
+        <span class="text-xl font-bold">Editar insumo</span>
     </ng-template>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+    <form [formGroup]="insumoForm" (ngSubmit)="submitform()">
+        <div class="p-fluid">
+            <div class="field">
+                <label for="username">Nombre</label>
+                <input pInputText id="nombre" formControlName="nombre" />
+            </div>
+            <div class="field">
+                <label for="password">Denominacion</label>
+                <input pInputText id="denominacion" formControlName="denominacion" />
+            </div>
+            <div class="field">
+                <label for="password">Descripción</label>
+                <input pInputText id="descripcion" formControlName="descripcion" />
+            </div>
+            <div class="field">
+                <label for="password">Marca</label>
+                <input pInputText id="marca" formControlName="marca" />
+            </div>
+            <div class="field">
+                <label for="password">Stock</label>
+                <p-inputNumber pInputNumber id="stock" formControlName="stock" />
+            </div>
+            <div class="field">
+                <label for="password">Stock Minimo</label>
+                <p-inputNumber pInputNumber id="stockMinimo" formControlName="stockMinimo" />
+            </div>
+            <div class="field">
+                <label for="password">Stock Máximo</label>
+                <p-inputNumber pInputNumber id="stockMaximo" formControlName="stockMaximo" />
+            </div>
+            <p-button label="Login" type="submit" [disabled]="!formularioInvalido"></p-button>
+        </div>
+    </form>
     <ng-template pTemplate="footer">
         <p-button (onClick)="cerrarModal()" icon="pi pi-check" label="Ok" styleClass="p-button-text"></p-button>
     </ng-template>
