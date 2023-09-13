@@ -54,7 +54,13 @@ export class EditarInsumoModalComponent implements OnInit {
 
   cargarInsumo(id: string){
     this.insumoService.getOneById(id).subscribe((insumo:Insumo) => {
-      console.log(insumo)
+      this.insumoForm.controls['nombre'].setValue(insumo.nombre);
+      this.insumoForm.controls['denominacion'].setValue(insumo.denominacion);
+      this.insumoForm.controls['descripcion'].setValue(insumo.descripcion);
+      this.insumoForm.controls['marca'].setValue(insumo.marca);
+      this.insumoForm.controls['stock'].setValue(insumo.stock);
+      this.insumoForm.controls['stockMinimo'].setValue(insumo.stockMinimo);
+      this.insumoForm.controls['stockMaximo'].setValue(insumo.stockMaximo);
     })
   }
 
@@ -68,6 +74,7 @@ export class EditarInsumoModalComponent implements OnInit {
   }
   
   cerrarModal(){
+    this.insumoForm.reset();
     this.modalVisible = false;
   }
 

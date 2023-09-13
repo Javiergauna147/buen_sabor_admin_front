@@ -2,6 +2,7 @@ export interface Insumo {
     _id: string,
     nombre: string,
     denominacion: string,
+    descripcion: string,
     marca: string,
     stock: number,
     stockMinimo: number,
