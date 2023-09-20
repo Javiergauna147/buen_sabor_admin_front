@@ -31,11 +31,15 @@ export class InsumosPageComponent implements OnInit {
   constructor(private insumosService: InsumosService) {}
 
   ngOnInit(): void {
-      this.insumosService.getAll().subscribe({
-        next: (insumos: Insumo[]) => {
-          this.insumos = insumos
-        }
-      })
+    this.cargarInsumos();
+  }
+  
+  cargarInsumos(){
+    this.insumosService.getAll().subscribe({
+      next: (insumos: Insumo[]) => {
+        this.insumos = insumos
+      }
+    })
   }
 
 

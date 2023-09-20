@@ -8,7 +8,7 @@ export interface Insumo {
     stockMinimo: number,
     stockMaximo: number
     requiereRefrigeracion: boolean,
-    rubro: Rubro
+    rubro?: Rubro
 }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -27,6 +27,8 @@ import { InsumosService } from 'src/app/services/insumos/insumos.service';
 })
 export class EditarInsumoModalComponent implements OnInit {
 
+  @Output() insumoEditado = new EventEmitter<string>();
+
   editarInsumo: Subject<Insumo> = new Subject();
 
   modalVisible: boolean = false;
@@ -54,6 +56,7 @@ export class EditarInsumoModalComponent implements OnInit {
 
   cargarInsumo(id: string){
     this.insumoService.getOneById(id).subscribe((insumo:Insumo) => {
+      this.insumo = insumo;
       this.insumoForm.controls['nombre'].setValue(insumo.nombre);
       this.insumoForm.controls['denominacion'].setValue(insumo.denominacion);
       this.insumoForm.controls['descripcion'].setValue(insumo.descripcion);
@@ -65,7 +68,21 @@ export class EditarInsumoModalComponent implements OnInit {
   }
 
   submitform() {
-    console.log('Suubmiteando Form')
+    let insumoPayload = {
+      _id: this.insumo?._id,
+      nombre: this.insumoForm.controls['nombre'].value,
+      denominacion: this.insumoForm.controls['denominacion'].value,
+      descripcion: this.insumoForm.controls['descripcion'].value,
+      marca: this.insumoForm.controls['marca'].value,
+      stock: this.insumoForm.controls['stock'].value,
+      stockMinimo: this.insumoForm.controls['stockMinimo'].value,
+      stockMaximo: this.insumoForm.controls['stockMaximo'].value
+    }
+    this.insumoService.putUpdateOne(insumoPayload).subscribe({
+      next: (res) => {
+        this.cerrarModal();
+      }
+    })
   }
 
   
@@ -75,6 +92,7 @@ export class EditarInsumoModalComponent implements OnInit {
   
   cerrarModal(){
     this.insumoForm.reset();
+    this.insumoEditado.emit();
     this.modalVisible = false;
   }
 

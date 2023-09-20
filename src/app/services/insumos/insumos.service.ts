@@ -21,4 +21,8 @@ export class InsumosService {
   getOneById(id: string): Observable<Insumo>{
     return this.http.get<Insumo>(`${this.urlInsumos}/find/${id}`)
   }
+
+  putUpdateOne(insumo: any): Observable<any>{
+    return this.http.put<Insumo>(`${this.urlInsumos}/update`, insumo)
+  }
 }
