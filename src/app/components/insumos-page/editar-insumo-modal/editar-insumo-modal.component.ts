@@ -27,7 +27,7 @@ import { InsumosService } from 'src/app/services/insumos/insumos.service';
 })
 export class EditarInsumoModalComponent implements OnInit {
 
-  @Output() insumoEditado = new EventEmitter<string>();
+  @Output() insumoEditado = new EventEmitter<void>();
 
   editarInsumo: Subject<Insumo> = new Subject();
 

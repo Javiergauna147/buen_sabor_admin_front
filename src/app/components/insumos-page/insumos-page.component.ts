@@ -6,6 +6,8 @@ import { RippleModule } from 'primeng/ripple';
 import { InsumosService } from 'src/app/services/insumos/insumos.service';
 import { Insumo } from 'src/app/services/insumos/insumos.interface';
 import { EditarInsumoModalComponent } from './editar-insumo-modal/editar-insumo-modal.component';
+import { DividerModule } from 'primeng/divider';
+import { CrearInsumoModalComponent } from './crear-insumo-modal/crear-insumo-modal.component';
 
 
 @Component({
@@ -16,7 +18,9 @@ import { EditarInsumoModalComponent } from './editar-insumo-modal/editar-insumo-
     TableModule,
     ButtonModule,
     RippleModule,
-    EditarInsumoModalComponent
+    EditarInsumoModalComponent,
+    DividerModule,
+    CrearInsumoModalComponent
   ],
   templateUrl: './insumos-page.component.html',
   styleUrls: ['./insumos-page.component.scss']
@@ -25,8 +29,10 @@ export class InsumosPageComponent implements OnInit {
 
 
   @ViewChild(EditarInsumoModalComponent) editarInsumoModal: EditarInsumoModalComponent | undefined;
+  @ViewChild(CrearInsumoModalComponent) crearInsumoModal: CrearInsumoModalComponent | undefined;
 
   insumos: Insumo[] = [];
+
 
   constructor(private insumosService: InsumosService) {}
 
@@ -45,6 +51,10 @@ export class InsumosPageComponent implements OnInit {
 
   editarInsumo(insumo: Insumo) {
     this.editarInsumoModal?.editarInsumo.next(insumo);
+  }
+
+  crearInsumo(){
+    this.crearInsumoModal?.crearInsumo.next();
   }
 
 }

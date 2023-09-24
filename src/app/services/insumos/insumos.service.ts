@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Insumo } from './insumos.interface';
+import { Insumo, createInsumoPayload } from './insumos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,9 @@ export class InsumosService {
 
   putUpdateOne(insumo: any): Observable<any>{
     return this.http.put<Insumo>(`${this.urlInsumos}/update`, insumo)
+  }
+
+  postCreateOne(insumo: createInsumoPayload): Observable<any>{
+    return this.http.post<any>(`${this.urlInsumos}/create`, insumo)
   }
 }
