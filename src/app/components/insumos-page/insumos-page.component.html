@@ -1,4 +1,7 @@
-<p-button (onClick)="crearInsumo()" label="Crear Insumo" styleClass="p-button-raised"></p-button>
+<div class="p-3">
+    <p-button (onClick)="crearInsumo()" label="Crear Insumo" styleClass="p-button-raised" class="mr-2"></p-button>
+    <p-button (onClick)="crearRubroInsumo()" label="Crear Rubro de Insumo" styleClass="p-button-raised"></p-button>
+</div>
 <p-divider></p-divider>
 <p-table
     [value]="insumos"
@@ -40,3 +43,4 @@
 
 <app-editar-insumo-modal #editarInsumoModal (insumoEditado)="cargarInsumos()"></app-editar-insumo-modal>
 <app-crear-insumo-modal #crearInsumoModal (insumoCreado)="cargarInsumos()"></app-crear-insumo-modal>
+<app-crear-rubro-insumo-modal #crearRubroInsumoModal></app-crear-rubro-insumo-modal>

@@ -8,6 +8,7 @@ import { Insumo } from 'src/app/services/insumos/insumos.interface';
 import { EditarInsumoModalComponent } from './editar-insumo-modal/editar-insumo-modal.component';
 import { DividerModule } from 'primeng/divider';
 import { CrearInsumoModalComponent } from './crear-insumo-modal/crear-insumo-modal.component';
+import { CrearRubroInsumoModalComponent } from './crear-rubro-insumo-modal/crear-rubro-insumo-modal.component';
 
 
 @Component({
@@ -20,7 +21,8 @@ import { CrearInsumoModalComponent } from './crear-insumo-modal/crear-insumo-mod
     RippleModule,
     EditarInsumoModalComponent,
     DividerModule,
-    CrearInsumoModalComponent
+    CrearInsumoModalComponent,
+    CrearRubroInsumoModalComponent
   ],
   templateUrl: './insumos-page.component.html',
   styleUrls: ['./insumos-page.component.scss']
@@ -30,6 +32,7 @@ export class InsumosPageComponent implements OnInit {
 
   @ViewChild(EditarInsumoModalComponent) editarInsumoModal: EditarInsumoModalComponent | undefined;
   @ViewChild(CrearInsumoModalComponent) crearInsumoModal: CrearInsumoModalComponent | undefined;
+  @ViewChild(CrearRubroInsumoModalComponent) crearRubroInsumoModal: CrearRubroInsumoModalComponent | undefined;
 
   insumos: Insumo[] = [];
 
@@ -55,6 +58,9 @@ export class InsumosPageComponent implements OnInit {
 
   crearInsumo(){
     this.crearInsumoModal?.crearInsumo.next();
+  }
+  crearRubroInsumo(){
+    this.crearRubroInsumoModal?.crearRubroInsumo.next();
   }
 
 }

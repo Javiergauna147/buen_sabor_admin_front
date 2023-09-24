@@ -59,13 +59,15 @@ export class CrearInsumoModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rubroInsumosService.getAll().subscribe({
-      next: (rubros: RubroInsumo[]) => {
-        this.rubrosInsumos = rubros;
+    this.crearInsumo.subscribe({
+      next: () => {
+        this.rubroInsumosService.getAll().subscribe({
+          next: (rubros: RubroInsumo[]) => {
+            this.rubrosInsumos = rubros;
+          }
+        })
+        this.mostrarModal();
       }
-    })
-    this.crearInsumo.subscribe(() => {
-      this.mostrarModal();
     })
   }
 
