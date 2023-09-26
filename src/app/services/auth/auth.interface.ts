@@ -5,13 +5,10 @@ export interface UsuarioResponse {
 }
 
 export interface Usuario {
-    _id: string,
-    nombre: string,
-    apellid: string,
+    _id?: string,
     email: string,
-    telefono: string,
-    rol: string,
-    domicilios: Domicilio[]
+    password?: string,
+    rol?: string,
 }
 
 export interface Domicilio {
