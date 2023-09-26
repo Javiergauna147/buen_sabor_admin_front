@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -6,6 +6,7 @@ import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
 import { Usuario } from 'src/app/services/auth/auth.interface';
 import { AuthService } from '../../services/auth/auth.service';
+import { CrearUsuarioModalComponent } from './crear-usuario-modal/crear-usuario-modal.component';
 
 @Component({
   selector: 'app-usuarios-page',
@@ -15,12 +16,15 @@ import { AuthService } from '../../services/auth/auth.service';
     TableModule,
     ButtonModule,
     RippleModule,
-    DividerModule
+    DividerModule,
+    CrearUsuarioModalComponent
   ],
   templateUrl: './usuarios-page.component.html',
   styleUrls: ['./usuarios-page.component.scss']
 })
 export class UsuariosPageComponent implements OnInit {
+
+  @ViewChild(CrearUsuarioModalComponent) crearUsuarioModal: CrearUsuarioModalComponent | undefined;
 
   usuarios: Usuario[] = [];
 
@@ -36,6 +40,10 @@ export class UsuariosPageComponent implements OnInit {
         this.usuarios = usuarios;
       }
     })
+  }
+
+  crearUsuario() {
+    this.crearUsuarioModal?.crearUsuario.next();
   }
 
 }

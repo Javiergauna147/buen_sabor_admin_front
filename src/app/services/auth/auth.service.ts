@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Usuario, UsuarioResponse } from './auth.interface';
+import { Rol, Usuario, UsuarioResponse } from './auth.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,6 +25,10 @@ export class AuthService {
 
   findAllusers(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.urlUsuario}/users`);
+  }
+
+  findAllRoles(): Observable<Rol[]>{
+    return this.http.get<Rol[]>(`${this.urlUsuario}/roles`);
   }
 
   guardarToken(token: string) {

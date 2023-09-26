@@ -16,3 +16,9 @@ export interface Domicilio {
     numero: number,
     localidad: string
 }
+
+
+export interface Rol {
+    _id?: string
+    rol: string
+}
