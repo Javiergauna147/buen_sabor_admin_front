@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
 import { Usuario } from 'src/app/services/auth/auth.interface';
-import { AuthService } from '../../../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-usuarios-page',
@@ -34,7 +34,6 @@ export class UsuariosPageComponent implements OnInit {
     this.authService.findAllusers().subscribe({
       next: (usuarios: Usuario[]) => {
         this.usuarios = usuarios;
-        console.log(this.usuarios)
       }
     })
   }
