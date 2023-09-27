@@ -80,6 +80,10 @@ export class CrearUsuarioModalComponent implements OnInit {
     this.modalVisible = false;
   }
 
+  get emailInvalido(): boolean {
+    return this.usuarioForm.controls.email.invalid && this.usuarioForm.controls.email.touched
+  }
+
   get formularioInvalido(): boolean {
     return this.usuarioForm.invalid;
   }

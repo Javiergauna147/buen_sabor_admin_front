@@ -7,6 +7,7 @@ import { DividerModule } from 'primeng/divider';
 import { Usuario } from 'src/app/services/auth/auth.interface';
 import { AuthService } from '../../services/auth/auth.service';
 import { CrearUsuarioModalComponent } from './crear-usuario-modal/crear-usuario-modal.component';
+import { CrearRolModalComponent } from './crear-rol-modal/crear-rol-modal.component';
 
 @Component({
   selector: 'app-usuarios-page',
@@ -17,7 +18,8 @@ import { CrearUsuarioModalComponent } from './crear-usuario-modal/crear-usuario-
     ButtonModule,
     RippleModule,
     DividerModule,
-    CrearUsuarioModalComponent
+    CrearUsuarioModalComponent,
+    CrearRolModalComponent
   ],
   templateUrl: './usuarios-page.component.html',
   styleUrls: ['./usuarios-page.component.scss']
@@ -25,6 +27,7 @@ import { CrearUsuarioModalComponent } from './crear-usuario-modal/crear-usuario-
 export class UsuariosPageComponent implements OnInit {
 
   @ViewChild(CrearUsuarioModalComponent) crearUsuarioModal: CrearUsuarioModalComponent | undefined;
+  @ViewChild(CrearRolModalComponent) CrearRolModal: CrearRolModalComponent | undefined;
 
   usuarios: Usuario[] = [];
 
@@ -44,6 +47,10 @@ export class UsuariosPageComponent implements OnInit {
 
   crearUsuario() {
     this.crearUsuarioModal?.crearUsuario.next();
+  }
+
+  crearRol() {
+    this.CrearRolModal?.crearRol.next();
   }
 
 }

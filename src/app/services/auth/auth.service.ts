@@ -23,6 +23,10 @@ export class AuthService {
     return this.http.post<any>(`${this.urlUsuario}/create-user`, user);
   }
 
+  createRol(rol: Rol): Observable<any>{
+    return this.http.post<any>(`${this.urlUsuario}/rol`, rol);
+  }
+
   findAllusers(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.urlUsuario}/users`);
   }
