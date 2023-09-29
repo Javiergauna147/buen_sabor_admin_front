@@ -30,6 +30,9 @@ export class AuthService {
   findAllusers(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.urlUsuario}/users`);
   }
+  findOneUser(id: string): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.urlUsuario}/user/${id}`);
+  }
 
   findAllRoles(): Observable<Rol[]>{
     return this.http.get<Rol[]>(`${this.urlUsuario}/roles`);

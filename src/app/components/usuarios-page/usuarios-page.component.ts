@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/services/auth/auth.interface';
 import { AuthService } from '../../services/auth/auth.service';
 import { CrearUsuarioModalComponent } from './crear-usuario-modal/crear-usuario-modal.component';
 import { CrearRolModalComponent } from './crear-rol-modal/crear-rol-modal.component';
+import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
 
 @Component({
   selector: 'app-usuarios-page',
@@ -19,7 +20,8 @@ import { CrearRolModalComponent } from './crear-rol-modal/crear-rol-modal.compon
     RippleModule,
     DividerModule,
     CrearUsuarioModalComponent,
-    CrearRolModalComponent
+    CrearRolModalComponent,
+    EditarUsuarioModalComponent
   ],
   templateUrl: './usuarios-page.component.html',
   styleUrls: ['./usuarios-page.component.scss']
@@ -27,7 +29,8 @@ import { CrearRolModalComponent } from './crear-rol-modal/crear-rol-modal.compon
 export class UsuariosPageComponent implements OnInit {
 
   @ViewChild(CrearUsuarioModalComponent) crearUsuarioModal: CrearUsuarioModalComponent | undefined;
-  @ViewChild(CrearRolModalComponent) CrearRolModal: CrearRolModalComponent | undefined;
+  @ViewChild(CrearRolModalComponent) crearRolModal: CrearRolModalComponent | undefined;
+  @ViewChild(EditarUsuarioModalComponent) editarUsuarioModal: EditarUsuarioModalComponent | undefined;
 
   usuarios: Usuario[] = [];
 
@@ -45,12 +48,16 @@ export class UsuariosPageComponent implements OnInit {
     })
   }
 
+  editarUsuario(id: string) {
+   this.editarUsuarioModal?.editarUsuario.next(id);
+  }
+
   crearUsuario() {
     this.crearUsuarioModal?.crearUsuario.next();
   }
 
   crearRol() {
-    this.CrearRolModal?.crearRol.next();
+    this.crearRolModal?.crearRol.next();
   }
 
 }

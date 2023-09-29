@@ -25,7 +25,7 @@
             <td>{{ usuario.rol}}</td>
             <td>
                 <div class="flex align-items-center justify-content-center gap-2">
-                    <p-button  pRipple type="button" icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
+                    <p-button (onClick)="editarUsuario(usuario._id)"  pRipple type="button" icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
                 </div>
             </td>
         </tr>
@@ -34,3 +34,4 @@
 
 <app-crear-usuario-modal #crearUsuarioModal (usuarioCreado)="cargarUsuarios()"></app-crear-usuario-modal>
 <app-crear-rol-modal #crearRolModal (rolCreado)="cargarUsuarios()"></app-crear-rol-modal>
+<app-editar-usuario-modal #editarUsuarioModal (usuarioEditado)="cargarUsuarios()"></app-editar-usuario-modal>
