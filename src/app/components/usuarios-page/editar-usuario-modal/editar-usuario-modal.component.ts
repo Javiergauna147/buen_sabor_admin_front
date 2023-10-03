@@ -34,6 +34,7 @@ export class EditarUsuarioModalComponent implements OnInit {
   usuario: Usuario | undefined;
 
   roles: Rol[] = [];
+  rolesDropdown: Rol[] = [];
 
   usuarioForm = this.fb.group({
     email: [{value: '', disabled: true}, Validators.required],
@@ -61,8 +62,15 @@ export class EditarUsuarioModalComponent implements OnInit {
       next: (user: Usuario) => {
         this.usuario = user;
         this.usuarioForm.controls['email'].setValue(user.email);
+        let userRol = this.roles.find((rol:Rol) => rol.rol === user.rol)
+        this.moverRolEnArray(userRol)
       }
     })
+  }
+
+  moverRolEnArray(rol: any){
+    let rolesFiltrados = this.roles.filter((rolEnArray: Rol) => rolEnArray.rol !== rol.rol)
+    this.rolesDropdown = [{...rol}, ...rolesFiltrados]
   }
 
   submitForm() {
@@ -74,6 +82,7 @@ export class EditarUsuarioModalComponent implements OnInit {
   }
 
   cerrarModal() {
+    this.rolesDropdown = [];
     this.usuarioForm.reset();
     this.usuarioEditado.emit();
     this.modalVisible = false;
