@@ -74,7 +74,15 @@ export class EditarUsuarioModalComponent implements OnInit {
   }
 
   submitForm() {
-
+    let userPayload = {
+      _id: this.usuario?._id,
+      rol: this.usuarioForm.controls['rol'].value? this.usuarioForm.controls['rol'].value : ''
+    }
+    this.authService.updateUser(userPayload).subscribe({
+      next: () => {
+        this.cerrarModal();
+      }
+    })
   }
 
   mostrarModal() {
@@ -89,6 +97,6 @@ export class EditarUsuarioModalComponent implements OnInit {
   }
 
   get formularioInvalido(): boolean {
-    return this.usuarioForm.invalid;
+    return this.usuarioForm.valid && this.usuarioForm.controls.rol.dirty && (this.usuarioForm.controls.rol.value === this.usuario?.rol);
   }
 }

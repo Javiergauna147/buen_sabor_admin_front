@@ -22,6 +22,9 @@ export class AuthService {
   createUser(user: Usuario): Observable<any>{
     return this.http.post<any>(`${this.urlUsuario}/create-user`, user);
   }
+  updateUser(user: {_id: string | undefined, rol: string}): Observable<any>{
+    return this.http.put<any>(`${this.urlUsuario}/update-user`, user);
+  }
 
   createRol(rol: Rol): Observable<any>{
     return this.http.post<any>(`${this.urlUsuario}/rol`, rol);
