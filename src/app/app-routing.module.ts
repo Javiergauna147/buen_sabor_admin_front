@@ -4,6 +4,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { InsumosPageComponent } from './components/insumos-page/insumos-page.component';
 import { UsuariosPageComponent } from './components/usuarios-page/usuarios-page.component';
+import { ProductosPageComponent } from './components/productos-page/productos-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: 'menu-usuarios', component: UsuariosPageComponent
+  },
+  {
+    path: 'menu-productos', component: ProductosPageComponent
   }
 ];
 
