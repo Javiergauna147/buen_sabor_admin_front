@@ -7,6 +7,7 @@ import { DividerModule } from 'primeng/divider';
 import { ProductosService } from '../../services/productos/productos.service';
 import { Producto } from 'src/app/services/productos/productos.interface';
 import { ModalVerRecetaComponent } from './modal-ver-receta/modal-ver-receta.component';
+import { CreaRubroProductoModalComponent } from './crea-rubro-producto-modal/crea-rubro-producto-modal.component';
 
 @Component({
   selector: 'app-productos-page',
@@ -17,7 +18,8 @@ import { ModalVerRecetaComponent } from './modal-ver-receta/modal-ver-receta.com
     ButtonModule,
     RippleModule,
     DividerModule,
-    ModalVerRecetaComponent
+    ModalVerRecetaComponent,
+    CreaRubroProductoModalComponent
   ],
   templateUrl: './productos-page.component.html',
   styleUrls: ['./productos-page.component.scss']
@@ -25,6 +27,7 @@ import { ModalVerRecetaComponent } from './modal-ver-receta/modal-ver-receta.com
 export class ProductosPageComponent  implements OnInit {
 
   @ViewChild(ModalVerRecetaComponent) modalVerReceta: ModalVerRecetaComponent | undefined;
+  @ViewChild(CreaRubroProductoModalComponent) crearRubroProductoModal: CreaRubroProductoModalComponent | undefined;
 
   productos: Producto[] = [];
 
@@ -43,7 +46,7 @@ export class ProductosPageComponent  implements OnInit {
   }
 
   crearRubroProducto() {
-
+    this.crearRubroProductoModal?.crearRubroProducto.next();
   }
 
   mostrarRecetaProducto(receta: string) {

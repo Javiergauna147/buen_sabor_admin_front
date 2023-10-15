@@ -1,1 +1,20 @@
-<p>crea-rubro-producto-modal works!</p>
+<p-dialog header="Header" [(visible)]="modalVisible" [draggable]="false" [modal]="true" [style]="{ width: '50vw' }"
+    [closable]="false">
+    <ng-template pTemplate="header">
+        <span class="text-xl font-bold">Crear Rubro</span>
+    </ng-template>
+    <form [formGroup]="productoRubroForm">
+        <div class="grid p-fluid p-5">
+            <div class="col">
+                <div class="field">
+                    <label for="nombre">Nombre</label>
+                    <input pInputText id="nombre" formControlName="nombre" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button (onClick)="cerrarModal()" icon="pi pi-check" label="cancelar" styleClass="p-button-danger p-button-text"></p-button>
+        <p-button  (onClick)="submitForm()" label="Crear" type="submit" [disabled]="formularioInvalido"></p-button>
+    </ng-template>
+</p-dialog>
