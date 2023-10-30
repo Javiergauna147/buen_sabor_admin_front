@@ -32,6 +32,11 @@
                 <textarea rows="5" cols="30" pInputTextarea formControlName="descripcion"></textarea>
             </div>
         </div>
+        <div class="grid p-fluid p-5 pt-0">
+            <div class="col pb-8">
+                <app-tabla-insumos #tablaInsumos></app-tabla-insumos>
+            </div>
+        </div>
     </form>
     <ng-template pTemplate="footer">
         <p-button (onClick)="cerrarModal()" icon="pi pi-check" label="cancelar" styleClass="p-button-danger p-button-text"></p-button>

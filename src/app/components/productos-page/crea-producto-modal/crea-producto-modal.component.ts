@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -10,6 +10,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { Subject } from 'rxjs';
 import { RubroProducto } from 'src/app/services/rubro-productos/rubro-productos.interface';
 import { RubroProductosService } from '../../../services/rubro-productos/rubro-productos.service';
+import { TablaInsumosComponent } from './tabla-insumos/tabla-insumos.component';
 
 @Component({
   selector: 'app-crea-producto-modal',
@@ -22,13 +23,15 @@ import { RubroProductosService } from '../../../services/rubro-productos/rubro-p
     InputTextModule,
     InputNumberModule,
     DropdownModule,
-    InputTextareaModule
+    InputTextareaModule,
+    TablaInsumosComponent
   ],
   templateUrl: './crea-producto-modal.component.html',
   styleUrls: ['./crea-producto-modal.component.scss']
 })
 export class CreaProductoModalComponent implements OnInit {
 
+  @ViewChild(TablaInsumosComponent) tablaInsumos: TablaInsumosComponent | undefined;
 
   @Output() productoCreado = new EventEmitter<void>();
 
@@ -64,7 +67,8 @@ export class CreaProductoModalComponent implements OnInit {
   }
 
   submitform(){
-
+    this.tablaInsumos?.restaurarInsumos();
+    this.tablaInsumos?.restaurarTabla();
   }
 
   mostrarModal() {
@@ -74,6 +78,8 @@ export class CreaProductoModalComponent implements OnInit {
   cerrarModal(){
     this.productoForm.reset();
     this.productoCreado.emit();
+    this.tablaInsumos?.restaurarInsumos();
+    this.tablaInsumos?.restaurarTabla();
     this.modalVisible = false;
   }
 
