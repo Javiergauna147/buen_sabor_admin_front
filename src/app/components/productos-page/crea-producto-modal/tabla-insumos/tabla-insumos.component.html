@@ -6,7 +6,7 @@
         <p-button (onClick)="agregarInsumo()" label="Agregar insumo"></p-button>
     </div>
 </div>
-<p-table [value]="insumosSeleccionados" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [value]="insumosSeleccionados" dataKey="insumo.insumo._id" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
         <tr>
             <th style="width:50%">INSUMO</th>
@@ -18,10 +18,10 @@
             <td>
                 {{ insumo.insumo.nombre }}
             </td>
-            <td [pEditableColumn]="insumo.cantidad" pEditableColumnField="name">
+            <td [pEditableColumn]="insumo.cantidad" pEditableColumnField="cantidad">
                 <p-cellEditor>
                     <ng-template pTemplate="input">
-                        <input pInputText type="text"required />
+                        <input pInputText type="number" [(ngModel)]="insumo.cantidad" required />
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{ insumo.cantidad }}

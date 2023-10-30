@@ -7,6 +7,7 @@ import { Insumo } from 'src/app/services/insumos/insumos.interface';
 import { InsumosService } from '../../../../services/insumos/insumos.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-tabla-insumos',
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     TableModule,
     ButtonModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    InputTextModule
   ],
   templateUrl: './tabla-insumos.component.html',
   styleUrls: ['./tabla-insumos.component.scss']
@@ -46,6 +48,10 @@ export class TablaInsumosComponent implements OnInit {
     this.insumosSeleccionados.push({
       insumo: this.insumoSelected,
       cantidad: 1
+    })
+    
+    this.insumosDisponibles = this.insumosDisponibles.filter((insumo: Insumo) => {
+      return insumo._id !== this.insumoSelected?._id
     })
   }
 
