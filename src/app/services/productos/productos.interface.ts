@@ -17,3 +17,15 @@ export interface Producto {
         } | string
     }
 }
+
+export interface CreateProductoPayload {
+    nombre: string,
+    descripcion: string,
+    detallePreparacion: string,
+    precio: number,
+    rubro: string,
+    articulos: {
+        cantidad: number,
+        articulo: string
+    }[]
+}

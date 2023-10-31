@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Producto } from './productos.interface';
+import { CreateProductoPayload, Producto } from './productos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class ProductosService {
 
   getAll(): Observable<Producto[]>{
     return this.http.get<Producto[]>(`${this.urlProductos}/find-all`)
+  }
+
+  postCreateOne(producto: CreateProductoPayload): Observable<any> {
+    return this.http.post<any>(`${this.urlProductos}/create`, producto)
   }
 
 }

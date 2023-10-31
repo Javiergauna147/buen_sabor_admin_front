@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 import { RubroProducto } from 'src/app/services/rubro-productos/rubro-productos.interface';
 import { RubroProductosService } from '../../../services/rubro-productos/rubro-productos.service';
 import { TablaInsumosComponent } from './tabla-insumos/tabla-insumos.component';
+import { ProductosService } from '../../../services/productos/productos.service';
 
 @Component({
   selector: 'app-crea-producto-modal',
@@ -51,7 +52,7 @@ export class CreaProductoModalComponent implements OnInit {
     rubro: [{}, Validators.required],
   })
 
-  constructor( private fb: FormBuilder, private rubroProductosService: RubroProductosService ) {}
+  constructor( private fb: FormBuilder, private rubroProductosService: RubroProductosService, private productosService: ProductosService ) {}
 
   ngOnInit(): void {
       this.crearProducto.subscribe({
@@ -67,8 +68,10 @@ export class CreaProductoModalComponent implements OnInit {
   }
 
   submitform(){
-    this.tablaInsumos?.restaurarInsumos();
-    this.tablaInsumos?.restaurarTabla();
+    // this.tablaInsumos?.restaurarInsumos();
+    // this.tablaInsumos?.restaurarTabla();
+    console.log(this.productoForm);
+    console.log(this.tablaInsumos?.insumosSeleccionados);
   }
 
   mostrarModal() {
@@ -85,7 +88,8 @@ export class CreaProductoModalComponent implements OnInit {
 
   
   get formularioInvalido(): boolean {
-    return this.productoForm.invalid;
+    return false;
+    // return this.productoForm.invalid;
   }
 
 }
