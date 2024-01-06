@@ -12,6 +12,8 @@ import { RubroProducto } from 'src/app/services/rubro-productos/rubro-productos.
 import { RubroProductosService } from '../../../services/rubro-productos/rubro-productos.service';
 import { TablaInsumosComponent } from './tabla-insumos/tabla-insumos.component';
 import { ProductosService } from '../../../services/productos/productos.service';
+import { CreateProductoPayload } from 'src/app/services/productos/productos.interface';
+import { InsumoTabla } from './tabla-insumos/tabla-insumos.interface';
 
 @Component({
   selector: 'app-crea-producto-modal',
@@ -68,10 +70,25 @@ export class CreaProductoModalComponent implements OnInit {
   }
 
   submitform(){
-    // this.tablaInsumos?.restaurarInsumos();
-    // this.tablaInsumos?.restaurarTabla();
-    console.log(this.productoForm);
-    console.log(this.tablaInsumos?.insumosSeleccionados);
+    let articulosPayload: { cantidad: number, articulo: string }[] = [];
+
+    this.tablaInsumos?.insumosSeleccionados.forEach((articulo: InsumoTabla) => {
+      articulosPayload.push({cantidad: articulo.cantidad, articulo: articulo.insumo?._id? articulo.insumo?._id : ''})
+    })
+
+    let productoPayload: CreateProductoPayload = {
+      nombre: this.productoForm.controls['nombre'].value? this.productoForm.controls['nombre'].value : '',
+      descripcion: this.productoForm.controls['descripcion'].value? this.productoForm.controls['descripcion'].value : '',
+      detallePreparacion: this.productoForm.controls['detallePreparacion'].value? this.productoForm.controls['detallePreparacion'].value : '',
+      precio: this.productoForm.controls['precio'].value? this.productoForm.controls['precio'].value : 0,
+      rubro: this.rubroSelected?._id? this.rubroSelected?._id : '',
+      articulos: articulosPayload
+    }
+    this.productosService.postCreateOne(productoPayload).subscribe({
+      next: () => {
+        this.cerrarModal();
+      }
+    })
   }
 
   mostrarModal() {
@@ -88,8 +105,7 @@ export class CreaProductoModalComponent implements OnInit {
 
   
   get formularioInvalido(): boolean {
-    return false;
-    // return this.productoForm.invalid;
+    return this.productoForm.invalid;
   }
 
 }

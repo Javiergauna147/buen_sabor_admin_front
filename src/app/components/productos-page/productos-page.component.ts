@@ -37,11 +37,15 @@ export class ProductosPageComponent  implements OnInit {
   constructor( private productosService: ProductosService ) {}
   
   ngOnInit(): void {
-      this.productosService.getAll().subscribe({
-        next: (productos) => {
-          this.productos = productos;
-        }
-      })
+    this.cargarProductos();
+  }
+  
+  cargarProductos(){
+    this.productosService.getAll().subscribe({
+      next: (productos) => {
+        this.productos = productos;
+      }
+    })
   }
 
   crearProducto() {
