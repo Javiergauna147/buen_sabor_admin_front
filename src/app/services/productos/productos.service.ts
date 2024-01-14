@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CreateProductoPayload, Producto } from './productos.interface';
+import { CreateProductoPayload, Producto, UpdateProductoPayload } from './productos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class ProductosService {
 
   getOneById(id: string): Observable<Producto>{
     return this.http.get<Producto>(`${this.urlProductos}/find/${id}`)
+  }
+
+  putUpdateOne(urlProductos: UpdateProductoPayload): Observable<any>{
+    return this.http.put<any>(`${this.urlProductos}/update`, urlProductos)
   }
 
   postCreateOne(producto: CreateProductoPayload): Observable<any> {

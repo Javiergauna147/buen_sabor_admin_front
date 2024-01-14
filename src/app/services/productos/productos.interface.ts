@@ -27,3 +27,16 @@ export interface CreateProductoPayload {
         articulo: string
     }[]
 }
+
+export interface UpdateProductoPayload {
+    _id: string | undefined,
+    nombre: string,
+    descripcion: string,
+    detallePreparacion: string,
+    precio: number,
+    rubro: string,
+    articulos: {
+        cantidad: number,
+        articulo: string
+    }[]
+}

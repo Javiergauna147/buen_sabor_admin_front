@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
-import { Producto } from 'src/app/services/productos/productos.interface';
+import { CreateProductoPayload, Producto, UpdateProductoPayload } from 'src/app/services/productos/productos.interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -13,6 +13,7 @@ import { TablaInsumosComponent } from '../crea-producto-modal/tabla-insumos/tabl
 import { RubroProducto } from 'src/app/services/rubro-productos/rubro-productos.interface';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { RubroProductosService } from 'src/app/services/rubro-productos/rubro-productos.service';
+import { InsumoTabla } from '../crea-producto-modal/tabla-insumos/tabla-insumos.interface';
 
 @Component({
   selector: 'app-editar-producto-modal',
@@ -100,6 +101,24 @@ export class EditarProductoModalComponent implements OnInit {
   }
 
   submitform(){
+    let articulosPayload: { cantidad: number, articulo: string }[] = [];
+
+    this.tablaInsumos?.insumosSeleccionados.forEach((articulo: InsumoTabla) => {
+      articulosPayload.push({cantidad: articulo.cantidad, articulo: articulo.insumo?._id? articulo.insumo?._id : ''})
+    })
+
+    let productoPayload: UpdateProductoPayload = {
+      _id: this.producto?._id,
+      nombre: this.productoForm.controls['nombre'].value? this.productoForm.controls['nombre'].value : '',
+      descripcion: this.productoForm.controls['descripcion'].value? this.productoForm.controls['descripcion'].value : '',
+      detallePreparacion: this.productoForm.controls['detallePreparacion'].value? this.productoForm.controls['detallePreparacion'].value : '',
+      precio: this.productoForm.controls['precio'].value? this.productoForm.controls['precio'].value : 0,
+      rubro: this.rubroSelected?._id? this.rubroSelected?._id : '',
+      articulos: articulosPayload
+    }
+    this.productosService.putUpdateOne(productoPayload).subscribe({next: (res) => {
+      this.cerrarModal();
+    }})
   }
 
   get formularioInvalido(): boolean {
