@@ -17,6 +17,10 @@ export class ProductosService {
     return this.http.get<Producto[]>(`${this.urlProductos}/find-all`)
   }
 
+  getOneById(id: string): Observable<Producto>{
+    return this.http.get<Producto>(`${this.urlProductos}/find/${id}`)
+  }
+
   postCreateOne(producto: CreateProductoPayload): Observable<any> {
     return this.http.post<any>(`${this.urlProductos}/create`, producto)
   }

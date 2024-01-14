@@ -9,6 +9,7 @@ import { Producto } from 'src/app/services/productos/productos.interface';
 import { ModalVerRecetaComponent } from './modal-ver-receta/modal-ver-receta.component';
 import { CreaRubroProductoModalComponent } from './crea-rubro-producto-modal/crea-rubro-producto-modal.component';
 import { CreaProductoModalComponent } from './crea-producto-modal/crea-producto-modal.component';
+import { EditarProductoModalComponent } from './editar-producto-modal/editar-producto-modal.component';
 
 @Component({
   selector: 'app-productos-page',
@@ -21,7 +22,8 @@ import { CreaProductoModalComponent } from './crea-producto-modal/crea-producto-
     DividerModule,
     ModalVerRecetaComponent,
     CreaRubroProductoModalComponent,
-    CreaProductoModalComponent
+    CreaProductoModalComponent,
+    EditarProductoModalComponent
   ],
   templateUrl: './productos-page.component.html',
   styleUrls: ['./productos-page.component.scss']
@@ -31,6 +33,7 @@ export class ProductosPageComponent  implements OnInit {
   @ViewChild(ModalVerRecetaComponent) modalVerReceta: ModalVerRecetaComponent | undefined;
   @ViewChild(CreaRubroProductoModalComponent) crearRubroProductoModal: CreaRubroProductoModalComponent | undefined;
   @ViewChild(CreaProductoModalComponent) creaProductoModal: CreaProductoModalComponent | undefined;
+  @ViewChild(EditarProductoModalComponent) editarProductoModal: EditarProductoModalComponent | undefined;
 
   productos: Producto[] = [];
 
@@ -47,7 +50,10 @@ export class ProductosPageComponent  implements OnInit {
       }
     })
   }
-
+  
+  editarProducto(producto: Producto) {
+    this.editarProductoModal?.editarProducto.next(producto);
+  }
   crearProducto() {
     this.creaProductoModal?.crearProducto.next();
   }

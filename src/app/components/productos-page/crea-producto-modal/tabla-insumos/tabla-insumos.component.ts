@@ -43,13 +43,18 @@ export class TablaInsumosComponent implements OnInit {
       }
     })
   }
-  
-  agregarInsumo() {
-    this.insumosSeleccionados.push({
-      insumo: this.insumoSelected,
-      cantidad: 1
+
+  cargarInsumoEnEdicion(insumos: { cantidad: number,articulo: Insumo }[]){
+    insumos.forEach((insumoTabla) => {
+      this.agregarInsumo(insumoTabla.articulo, insumoTabla.cantidad)
     })
-    
+  }
+  
+  agregarInsumo(insumo?: Insumo, cantidad?: number) {
+    this.insumosSeleccionados.push({
+      insumo: insumo? insumo : this.insumoSelected,
+      cantidad: cantidad? cantidad : 1
+    })
     this.insumosDisponibles = this.insumosDisponibles.filter((insumo: Insumo) => {
       return insumo._id !== this.insumoSelected?._id
     })

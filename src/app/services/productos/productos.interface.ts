@@ -1,3 +1,5 @@
+import { Insumo } from "../insumos/insumos.interface"
+
 export interface Producto {
     _id: string,
     nombre: string,
@@ -10,12 +12,8 @@ export interface Producto {
     },
     articulos: {
         cantidad: number,
-        articulo: {
-            _id: string,
-            nombre: string,
-            denominacion: string
-        } | string
-    }
+        articulo: Insumo
+    }[]
 }
 
 export interface CreateProductoPayload {

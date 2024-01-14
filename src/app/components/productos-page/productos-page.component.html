@@ -33,7 +33,7 @@
             <td>{{ producto.rubro.nombre }}</td>
             <td>
                 <div class="flex align-items-center justify-content-center gap-2">
-                    <p-button pRipple type="button" icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
+                    <p-button (onClick)="editarProducto(producto)" pRipple type="button" icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
                 </div>
             </td>
         </tr>
@@ -43,3 +43,4 @@
 <app-modal-ver-receta #modalVerReceta></app-modal-ver-receta>
 <app-crea-rubro-producto-modal #crearRubroProductoModal></app-crea-rubro-producto-modal>
 <app-crea-producto-modal #crearProductoModal (productoCreado)="cargarProductos()" ></app-crea-producto-modal>
+<app-editar-producto-modal #editarProductoModal (productoEditado)="cargarProductos()" ></app-editar-producto-modal>
