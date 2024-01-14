@@ -53,7 +53,6 @@ export class EditarProductoModalComponent implements OnInit {
     descripcion: ['', Validators.required],
     detallePreparacion: ['', Validators.required],
     precio: [0, [Validators.required, Validators.min(1)]],
-    rubro: [null as unknown as {_id: string,nombre: string}, Validators.required],
   })
 
   constructor(  private fb: FormBuilder, private productosService: ProductosService, private rubroProductosService: RubroProductosService ){}
@@ -74,7 +73,7 @@ export class EditarProductoModalComponent implements OnInit {
         this.productoForm.controls['descripcion'].setValue(producto.descripcion);
         this.productoForm.controls['detallePreparacion'].setValue(producto.detallePreparacion);
         this.productoForm.controls['precio'].setValue(producto.precio);
-        this.productoForm.controls['rubro'].setValue(producto.rubro);
+        this.rubroSelected = producto.rubro;
         this.tablaInsumos?.cargarInsumoEnEdicion(producto.articulos);
     }})
     
