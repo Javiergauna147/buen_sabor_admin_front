@@ -5,6 +5,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { InsumosPageComponent } from './components/insumos-page/insumos-page.component';
 import { UsuariosPageComponent } from './components/usuarios-page/usuarios-page.component';
 import { ProductosPageComponent } from './components/productos-page/productos-page.component';
+import { PedidosPageComponent } from './components/pedidos-page/pedidos-page.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'menu-productos', component: ProductosPageComponent
+  },
+  {
+    path: 'menu-pedidos', component: PedidosPageComponent
   }
 ];
 
