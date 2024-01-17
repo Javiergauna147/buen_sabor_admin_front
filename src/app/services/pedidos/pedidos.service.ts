@@ -16,4 +16,8 @@ export class PedidosService {
   getAllAdministrator(): Observable<GetAllAdministratorResponse[]>{
     return this.http.get<GetAllAdministratorResponse[]>(`${this.urlPedidos}/find-all-administrator`)
   }
+
+  deleteOneById(idPedido: string): Observable<any>{
+    return this.http.delete<any>(`${this.urlPedidos}/delete/${idPedido}`)
+  }
 }

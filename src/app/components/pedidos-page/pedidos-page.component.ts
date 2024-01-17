@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { GetAllAdministratorResponse } from '../../services/pedidos/pedidos.interface';
@@ -6,6 +6,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
+import { SeguroEliminarModalComponent } from './seguro-eliminar-modal/seguro-eliminar-modal.component';
 
 @Component({
   selector: 'app-pedidos-page',
@@ -15,12 +16,16 @@ import { DividerModule } from 'primeng/divider';
     TableModule,
     ButtonModule,
     RippleModule,
-    DividerModule
+    DividerModule,
+    SeguroEliminarModalComponent
   ],
   templateUrl: './pedidos-page.component.html',
   styleUrls: ['./pedidos-page.component.scss']
 })
 export class PedidosPageComponent implements OnInit {
+
+
+  @ViewChild(SeguroEliminarModalComponent) seguroEliminarModal: SeguroEliminarModalComponent | undefined;
 
   pedidos: GetAllAdministratorResponse[] = [];
 
@@ -28,8 +33,15 @@ export class PedidosPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarPedidos();
+    this.seguroEliminarModal?.pedidoEliminado.subscribe({next: () => {
+      this.buscarPedidos();
+    }})
   }
 
+
+  eliminarPedido(idPedido: string){
+    this.seguroEliminarModal?.mostrarModal(idPedido);
+  }
 
   buscarPedidos(){
     this.pedidosService.getAllAdministrator().subscribe({
