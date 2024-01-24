@@ -10,7 +10,7 @@ import { GetAllAdministratorResponse, GetAllEstadoPedidoResponse } from './pedid
 export class PedidosService {
 
   private urlPedidos: string = environment.API_BASE_ENDPOINT + '/pedido';
-  private urlEstadoPedidos: string = environment.API_BASE_ENDPOINT + '/estadp-pedido';
+  private urlEstadoPedidos: string = environment.API_BASE_ENDPOINT + '/estado-pedido';
 
   constructor( private http: HttpClient ) { }
 

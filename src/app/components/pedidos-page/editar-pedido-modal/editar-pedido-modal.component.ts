@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -20,7 +20,7 @@ import { DropdownModule } from 'primeng/dropdown';
   templateUrl: './editar-pedido-modal.component.html',
   styleUrls: ['./editar-pedido-modal.component.scss']
 })
-export class EditarPedidoModalComponent implements OnInit {
+export class EditarPedidoModalComponent {
 
   @Output() pedidoEditado = new EventEmitter<void>();
 
@@ -36,15 +36,11 @@ export class EditarPedidoModalComponent implements OnInit {
   })
 
   constructor(private fb: FormBuilder,  private pedidosService: PedidosService ){}
-
-  ngOnInit(): void {
-      this.cargarEstadosPedidos();
-  }
-
   cargarEstadosPedidos(){
     this.pedidosService.getAllEstadosPedido().subscribe({
       next: (estados: EstadoPedido[]) => {
         this.EstadosPedido = estados;
+        console.log(this.pedido)
         this.moverEstadoPedidoEnArray(this.pedido?.estado);
       }
     })
@@ -60,6 +56,25 @@ export class EditarPedidoModalComponent implements OnInit {
   }
 
   cerrarModal(){
+    this.EstadosPedidoDropdown = [];
+    this.pedidoForm.reset();
+    this.pedidoEditado.emit();
     this.modalVisible = false;
+  }
+
+  editarPedido(pedido: Pedido) {
+    this.pedido = pedido;
+    this.cargarEstadosPedidos();
+    this.mostrarModal();
+  }
+
+  submitForm() {
+    console.log(this.EstadosPedidoDropdown)
+    console.log(this.pedidoForm)
+    this.cerrarModal();
+  }
+
+  get formularioInvalido(): boolean {
+    return this.pedidoForm.valid && this.pedidoForm.controls.estado.dirty && (this.pedidoForm.controls.estado.value === this.pedido?.estado);
   }
 }

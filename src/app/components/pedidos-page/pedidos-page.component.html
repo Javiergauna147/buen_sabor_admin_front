@@ -23,7 +23,7 @@
             <td>{{ pedido.precio }}</td>
             <td>
                 <div class="flex align-items-center justify-content-center gap-2">
-                    <p-button pRipple type="button" icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
+                    <p-button (onClick)="editarPedido(pedido)" pRipple type="button" icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
                     <p-button (onClick)="eliminarPedido(pedido._id)" pRipple type="button" icon="pi pi-trash" styleClass="p-button-rounded p-button-warning p-button-text"></p-button>
                 </div>
             </td>
@@ -31,4 +31,5 @@
     </ng-template>
 </p-table>
 
+<app-editar-pedido-modal #editarPedidoModal (pedidoEditado)="buscarPedidos()"></app-editar-pedido-modal>
 <app-seguro-eliminar-modal #seguroEliminarModal (pedidoEliminado)="buscarPedidos()"></app-seguro-eliminar-modal>
