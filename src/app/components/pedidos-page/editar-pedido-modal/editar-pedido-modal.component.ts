@@ -75,6 +75,6 @@ export class EditarPedidoModalComponent {
   }
 
   get formularioInvalido(): boolean {
-    return this.pedidoForm.valid && this.pedidoForm.controls.estado.dirty && (this.pedidoForm.controls.estado.value === this.pedido?.estado);
+    return this.pedidoForm.valid && this.pedidoForm.controls.estado.dirty;
   }
 }
