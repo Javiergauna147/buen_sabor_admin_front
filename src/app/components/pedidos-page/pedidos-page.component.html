@@ -11,6 +11,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Cliente</th>
+            <th>Fecha Creacion</th>
             <th>Estado</th>
             <th>Precio</th>
             <th></th>
@@ -19,6 +20,7 @@
     <ng-template pTemplate="body" let-pedido>
         <tr>
             <td>{{ pedido.cliente.email }}</td>
+            <td>{{ pedido.fecha }}</td>
             <td>{{ pedido.estado.nombre }}</td>
             <td>{{ pedido.precio }}</td>
             <td>
