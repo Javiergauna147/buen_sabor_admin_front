@@ -33,5 +33,5 @@
     </ng-template>
 </p-table>
 
-<app-editar-pedido-modal #editarPedidoModal (pedidoEditado)="buscarPedidos()"></app-editar-pedido-modal>
+<app-editar-pedido-modal #editarPedidoModal (pedidoEditado)="handlerPedidoEditado($event)"></app-editar-pedido-modal>
 <app-seguro-eliminar-modal #seguroEliminarModal (pedidoEliminado)="buscarPedidos()"></app-seguro-eliminar-modal>

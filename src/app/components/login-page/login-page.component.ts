@@ -38,8 +38,8 @@ export class LoginPageComponent {
     }
 
     this.authService.login(userPayload).subscribe({
-      next: (res: UsuarioResponse) => {
-        this.authService.guardarToken(res.token);
+      next: (res: any) => {
+        this.authService.guardarToken(res.token, res._doc._id!);
         this.router.navigate(['home']);
       },
       error: (e) => {},

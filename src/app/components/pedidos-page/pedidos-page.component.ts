@@ -8,6 +8,7 @@ import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
 import { SeguroEliminarModalComponent } from './seguro-eliminar-modal/seguro-eliminar-modal.component';
 import { EditarPedidoModalComponent } from './editar-pedido-modal/editar-pedido-modal.component';
+import { SocketPedidoService } from 'src/app/services/socket/socket-pedido.service';
 
 @Component({
   selector: 'app-pedidos-page',
@@ -32,7 +33,7 @@ export class PedidosPageComponent implements OnInit {
 
   pedidos: GetAllAdministratorResponse[] = [];
 
-  constructor( private pedidosService: PedidosService ){}
+  constructor( private pedidosService: PedidosService, public socketPedidosService: SocketPedidoService){}
 
   ngOnInit(): void {
     this.buscarPedidos();
@@ -48,6 +49,11 @@ export class PedidosPageComponent implements OnInit {
 
   editarPedido(pedido: Pedido){
     this.editarPedidoModal?.editarPedido(pedido);
+  }
+
+  handlerPedidoEditado(pedido: Pedido){
+    this.socketPedidosService.sendEventUpdatePedido(pedido._id,pedido.estado.nombre??"", pedido.cliente._id);
+    this.buscarPedidos();
   }
 
   buscarPedidos(){

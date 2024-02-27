@@ -9,8 +9,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private tokenStorage = localStorage.getItem('token');
-
   private urlUsuario: string = environment.API_BASE_ENDPOINT + '/auth';
 
   constructor(private http: HttpClient) { }
@@ -41,11 +39,15 @@ export class AuthService {
     return this.http.get<Rol[]>(`${this.urlUsuario}/roles`);
   }
 
-  guardarToken(token: string) {
+  guardarToken(token: string, usuario: string) {
     localStorage.setItem('token', token);
+    localStorage.setItem('usuario', usuario);
   }
 
   obtenerToken(): string | null {
-    return this.tokenStorage;
+    return localStorage.getItem('token');
+  }
+  obtenerUsuario(): string | null {
+    return localStorage.getItem('usuario');
   }
 }
