@@ -12,8 +12,9 @@ import { RubroProducto } from 'src/app/services/rubro-productos/rubro-productos.
 import { RubroProductosService } from '../../../services/rubro-productos/rubro-productos.service';
 import { TablaInsumosComponent } from './tabla-insumos/tabla-insumos.component';
 import { ProductosService } from '../../../services/productos/productos.service';
-import { CreateProductoPayload } from 'src/app/services/productos/productos.interface';
+import { CreateProductoPayload, ImagenProductoPayload } from 'src/app/services/productos/productos.interface';
 import { InsumoTabla } from './tabla-insumos/tabla-insumos.interface';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-crea-producto-modal',
@@ -27,7 +28,8 @@ import { InsumoTabla } from './tabla-insumos/tabla-insumos.interface';
     InputNumberModule,
     DropdownModule,
     InputTextareaModule,
-    TablaInsumosComponent
+    TablaInsumosComponent,
+    FileUploadModule
   ],
   templateUrl: './crea-producto-modal.component.html',
   styleUrls: ['./crea-producto-modal.component.scss']
@@ -53,6 +55,8 @@ export class CreaProductoModalComponent implements OnInit {
     precio: [0, [Validators.required, Validators.min(1)]],
     rubro: [{}, Validators.required],
   })
+
+  imageProducto: ImagenProductoPayload= {};
 
   constructor( private fb: FormBuilder, private rubroProductosService: RubroProductosService, private productosService: ProductosService ) {}
 
@@ -82,7 +86,8 @@ export class CreaProductoModalComponent implements OnInit {
       detallePreparacion: this.productoForm.controls['detallePreparacion'].value? this.productoForm.controls['detallePreparacion'].value : '',
       precio: this.productoForm.controls['precio'].value? this.productoForm.controls['precio'].value : 0,
       rubro: this.rubroSelected?._id? this.rubroSelected?._id : '',
-      articulos: articulosPayload
+      articulos: articulosPayload,
+      imagen: this.imageProducto
     }
     this.productosService.postCreateOne(productoPayload).subscribe({
       next: () => {
@@ -101,6 +106,18 @@ export class CreaProductoModalComponent implements OnInit {
     this.tablaInsumos?.restaurarInsumos();
     this.tablaInsumos?.restaurarTabla();
     this.modalVisible = false;
+  }
+
+  onUploadImagen(event: any){
+    const file = event.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageProducto.data = reader.result as string;
+      this.imageProducto.nombre = event.files[0].name;
+      this.imageProducto.type = event.files[0].type;
+      console.log(this.imageProducto)
+    };
+    reader.readAsDataURL(file);
   }
 
   

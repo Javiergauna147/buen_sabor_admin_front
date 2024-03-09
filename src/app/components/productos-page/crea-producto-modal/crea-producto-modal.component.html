@@ -33,6 +33,14 @@
             </div>
         </div>
         <div class="grid p-fluid p-5 pt-0">
+            <div class="col">
+                <div class="field">
+                    <label>Imagen</label>
+                    <p-fileUpload chooseLabel="Elegir" [customUpload]="true" [auto]="true" accept="image/*" [maxFileSize]="1000000" (uploadHandler)="onUploadImagen($event)"></p-fileUpload>
+                </div>
+            </div>
+        </div>
+        <div class="grid p-fluid p-5 pt-0">
             <div class="col pb-8">
                 <app-tabla-insumos #tablaInsumos></app-tabla-insumos>
             </div>

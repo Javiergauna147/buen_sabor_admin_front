@@ -26,6 +26,13 @@ export interface CreateProductoPayload {
         cantidad: number,
         articulo: string
     }[]
+    imagen: ImagenProductoPayload
+}
+
+export interface ImagenProductoPayload {
+    nombre?: string,
+    type?: string,
+    data?: string
 }
 
 export interface UpdateProductoPayload {
