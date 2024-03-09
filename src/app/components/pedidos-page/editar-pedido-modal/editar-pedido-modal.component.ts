@@ -22,7 +22,7 @@ import { DropdownModule } from 'primeng/dropdown';
 })
 export class EditarPedidoModalComponent {
 
-  @Output() pedidoEditado = new EventEmitter<void>();
+  @Output() pedidoEditado = new EventEmitter<Pedido>();
 
   modalVisible: boolean = false;
 
@@ -58,7 +58,7 @@ export class EditarPedidoModalComponent {
   cerrarModal(){
     this.EstadosPedidoDropdown = [];
     this.pedidoForm.reset();
-    this.pedidoEditado.emit();
+    this.pedidoEditado.emit(this.pedido);
     this.modalVisible = false;
   }
 
@@ -70,7 +70,18 @@ export class EditarPedidoModalComponent {
 
   submitForm() {
     console.log(this.EstadosPedidoDropdown)
-    console.log(this.pedidoForm)
-    this.cerrarModal();
+    console.log(this.pedidoForm.value.estado)
+    if(this.pedidoForm.value.estado)
+      this.pedidosService.updateEstadoPedido(this.pedido!._id, this.pedidoForm.value.estado).subscribe({
+        next: (value) => {
+          if(this.pedido && this.pedido.estado) 
+            this.pedido.estado = value.estado;
+          this.cerrarModal();
+        }
+      })
+  }
+
+  get formularioInvalido(): boolean {
+    return !(this.pedidoForm.valid && this.pedidoForm.controls.estado.dirty);
   }
 }

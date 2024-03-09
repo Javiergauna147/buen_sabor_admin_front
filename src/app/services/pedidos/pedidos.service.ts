@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { GetAllAdministratorResponse, GetAllEstadoPedidoResponse } from './pedidos.interface';
+import { GetAllAdministratorResponse, GetAllEstadoPedidoResponse, Pedido } from './pedidos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +32,13 @@ export class PedidosService {
   deleteOneById(idPedido: string): Observable<any>{
     return this.http.delete<any>(`${this.urlPedidos}/delete/${idPedido}`)
   }
+
+  updateEstadoPedido(idPedido: string, estado: string): Observable<Pedido>{
+    let payload: object = {
+      _id: idPedido,
+      estado: estado
+    }
+    return this.http.put<Pedido>(`${this.urlPedidos}/updateEstadoPedido`, payload)
+  }
+
 }

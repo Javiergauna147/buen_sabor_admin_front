@@ -11,6 +11,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Cliente</th>
+            <th>Fecha Creacion</th>
             <th>Estado</th>
             <th>Precio</th>
             <th></th>
@@ -19,6 +20,7 @@
     <ng-template pTemplate="body" let-pedido>
         <tr>
             <td>{{ pedido.cliente.email }}</td>
+            <td>{{ pedido.fecha }}</td>
             <td>{{ pedido.estado.nombre }}</td>
             <td>{{ pedido.precio }}</td>
             <td>
@@ -31,5 +33,5 @@
     </ng-template>
 </p-table>
 
-<app-editar-pedido-modal #editarPedidoModal (pedidoEditado)="buscarPedidos()"></app-editar-pedido-modal>
+<app-editar-pedido-modal #editarPedidoModal (pedidoEditado)="handlerPedidoEditado($event)"></app-editar-pedido-modal>
 <app-seguro-eliminar-modal #seguroEliminarModal (pedidoEliminado)="buscarPedidos()"></app-seguro-eliminar-modal>
