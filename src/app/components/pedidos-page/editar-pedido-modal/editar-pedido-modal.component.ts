@@ -73,8 +73,4 @@ export class EditarPedidoModalComponent {
     console.log(this.pedidoForm)
     this.cerrarModal();
   }
-
-  get formularioInvalido(): boolean {
-    return this.pedidoForm.valid && this.pedidoForm.controls.estado.dirty;
-  }
 }
