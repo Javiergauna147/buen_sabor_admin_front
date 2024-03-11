@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {autoConnect:true} };
 @NgModule({
@@ -29,7 +30,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {autoCon
     StyleClassModule,
     NavbarComponent,
     CommonModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    ToastModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
