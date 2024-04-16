@@ -9,6 +9,9 @@ import { DividerModule } from 'primeng/divider';
 import { SeguroEliminarModalComponent } from './seguro-eliminar-modal/seguro-eliminar-modal.component';
 import { EditarPedidoModalComponent } from './editar-pedido-modal/editar-pedido-modal.component';
 import { SocketPedidoService } from 'src/app/services/socket/socket-pedido.service';
+import * as ExcelJS from 'exceljs';
+import { saveAs } from 'file-saver';
+import { ExcelService } from 'src/app/services/excel';
 
 @Component({
   selector: 'app-pedidos-page',
@@ -33,7 +36,7 @@ export class PedidosPageComponent implements OnInit {
 
   pedidos: GetAllAdministratorResponse[] = [];
 
-  constructor( private pedidosService: PedidosService, public socketPedidosService: SocketPedidoService){}
+  constructor( private pedidosService: PedidosService, public socketPedidosService: SocketPedidoService, private excelService: ExcelService){}
 
   ngOnInit(): void {
     this.buscarPedidos();
@@ -63,5 +66,12 @@ export class PedidosPageComponent implements OnInit {
       }
     })
   }
-
+  generarExcel(){
+    const mapeo = [
+      {key:"Cliente",fvalor:(item:GetAllAdministratorResponse)=>item.cliente.email},
+      {key:"Fecha creacion",fvalor:(item:GetAllAdministratorResponse)=>(item.fecha)},
+      {key:"Estado",fvalor:(item:GetAllAdministratorResponse)=>item.estado.nombre},
+      {key:"Precio",fvalor:(item:GetAllAdministratorResponse)=>item.precio}];
+      this.excelService.generarExcel<GetAllAdministratorResponse>(this.pedidos,mapeo,"Pedidos")
+  }
 }

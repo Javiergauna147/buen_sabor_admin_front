@@ -9,6 +9,7 @@ import { EditarInsumoModalComponent } from './editar-insumo-modal/editar-insumo-
 import { DividerModule } from 'primeng/divider';
 import { CrearInsumoModalComponent } from './crear-insumo-modal/crear-insumo-modal.component';
 import { CrearRubroInsumoModalComponent } from './crear-rubro-insumo-modal/crear-rubro-insumo-modal.component';
+import { ExcelService } from 'src/app/services/excel';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class InsumosPageComponent implements OnInit {
   insumos: Insumo[] = [];
 
 
-  constructor(private insumosService: InsumosService) {}
+  constructor(private insumosService: InsumosService, private excelService: ExcelService) {}
 
   ngOnInit(): void {
     this.cargarInsumos();
@@ -62,5 +63,19 @@ export class InsumosPageComponent implements OnInit {
   crearRubroInsumo(){
     this.crearRubroInsumoModal?.crearRubroInsumo.next();
   }
+
+  generarExcel(){
+    const mapeo = [
+      {key:"Nombre",fvalor:(item:Insumo)=>item.nombre},
+      {key:"Denominacion",fvalor:(item:Insumo)=>item.denominacion},
+      {key:"Marca",fvalor:(item:Insumo)=>item.marca},
+      {key:"Stock",fvalor:(item:Insumo)=>item.stock},
+      {key:"Stock maximo",fvalor:(item:Insumo)=>item.stockMaximo},
+      {key:"Stock minimo",fvalor:(item:Insumo)=>item.stockMinimo},
+      {key:"Rubro",fvalor:(item:Insumo)=>item.rubro},
+    ];
+    this.excelService.generarExcel<Insumo>(this.insumos,mapeo,"Insumos");
+  }
+
 
 }
