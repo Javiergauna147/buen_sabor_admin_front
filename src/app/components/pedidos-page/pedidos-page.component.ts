@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { GetAllAdministratorResponse, Pedido } from '../../services/pedidos/pedidos.interface';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
+import { InputTextModule } from 'primeng/inputtext';
 import { SeguroEliminarModalComponent } from './seguro-eliminar-modal/seguro-eliminar-modal.component';
 import { EditarPedidoModalComponent } from './editar-pedido-modal/editar-pedido-modal.component';
 import { SocketPedidoService } from 'src/app/services/socket/socket-pedido.service';
@@ -23,7 +24,8 @@ import { ExcelService } from 'src/app/services/excel';
     RippleModule,
     DividerModule,
     SeguroEliminarModalComponent,
-    EditarPedidoModalComponent
+    EditarPedidoModalComponent,
+    InputTextModule
   ],
   templateUrl: './pedidos-page.component.html',
   styleUrls: ['./pedidos-page.component.scss']
@@ -33,6 +35,7 @@ export class PedidosPageComponent implements OnInit {
 
   @ViewChild(SeguroEliminarModalComponent) seguroEliminarModal: SeguroEliminarModalComponent | undefined;
   @ViewChild(EditarPedidoModalComponent) editarPedidoModal: EditarPedidoModalComponent | undefined;
+  @ViewChild('dt1') dt1: Table | undefined;
 
   pedidos: GetAllAdministratorResponse[] = [];
 
@@ -65,6 +68,13 @@ export class PedidosPageComponent implements OnInit {
         this.pedidos = pedidos;
       }
     })
+  }
+  clear(table: Table) {
+    table.clear();
+  }
+
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt1?.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
   generarExcel(){
     const mapeo = [
