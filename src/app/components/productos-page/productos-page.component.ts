@@ -10,6 +10,7 @@ import { ModalVerRecetaComponent } from './modal-ver-receta/modal-ver-receta.com
 import { CreaRubroProductoModalComponent } from './crea-rubro-producto-modal/crea-rubro-producto-modal.component';
 import { CreaProductoModalComponent } from './crea-producto-modal/crea-producto-modal.component';
 import { EditarProductoModalComponent } from './editar-producto-modal/editar-producto-modal.component';
+import { ExcelService } from 'src/app/services/excel';
 
 @Component({
   selector: 'app-productos-page',
@@ -37,7 +38,7 @@ export class ProductosPageComponent  implements OnInit {
 
   productos: Producto[] = [];
 
-  constructor( private productosService: ProductosService ) {}
+  constructor( private productosService: ProductosService, private excelService: ExcelService ) {}
   
   ngOnInit(): void {
     this.cargarProductos();
@@ -64,6 +65,16 @@ export class ProductosPageComponent  implements OnInit {
 
   mostrarRecetaProducto(receta: string) {
     this.modalVerReceta?.mostrarReceta.next(receta);
+  }
+
+  generarExcel(){
+    const mapeo = [
+      {key:"Nombre",fvalor:(producto:Producto)=>producto.nombre},
+      {key:"Precio",fvalor:(producto:Producto)=>(""+producto.precio)},
+      {key:"Descripcion",fvalor:(producto:Producto)=>producto.descripcion},
+      {key:"Receta",fvalor:(producto:Producto)=>producto.detallePreparacion},
+      {key:"Rubro",fvalor:(producto:Producto)=>producto.rubro.nombre}];
+    this.excelService.generarExcel<Producto>(this.productos,mapeo,"Productos");
   }
 
 }

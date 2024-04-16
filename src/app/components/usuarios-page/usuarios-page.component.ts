@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { CrearUsuarioModalComponent } from './crear-usuario-modal/crear-usuario-modal.component';
 import { CrearRolModalComponent } from './crear-rol-modal/crear-rol-modal.component';
 import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
+import { ExcelService } from 'src/app/services/excel';
 
 @Component({
   selector: 'app-usuarios-page',
@@ -34,7 +35,7 @@ export class UsuariosPageComponent implements OnInit {
 
   usuarios: Usuario[] = [];
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private excelService: ExcelService) {}
 
   ngOnInit(): void {
       this.cargarUsuarios();
@@ -60,4 +61,10 @@ export class UsuariosPageComponent implements OnInit {
     this.crearRolModal?.crearRol.next();
   }
 
+  generarExcel(){
+    this.excelService.generarExcel<Usuario>(this.usuarios,[
+      {key:"Email",fvalor:(item)=>item.email},
+      {key:"Rol",fvalor:(item)=>(item.rol)}],
+      "Usuarios");
+  }
 }

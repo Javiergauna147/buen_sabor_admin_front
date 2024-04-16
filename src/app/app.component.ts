@@ -3,7 +3,6 @@ import { SocketPedidoService } from './services/socket/socket-pedido.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
