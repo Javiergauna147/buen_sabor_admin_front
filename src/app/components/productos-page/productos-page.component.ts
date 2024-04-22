@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
@@ -11,6 +11,7 @@ import { CreaRubroProductoModalComponent } from './crea-rubro-producto-modal/cre
 import { CreaProductoModalComponent } from './crea-producto-modal/crea-producto-modal.component';
 import { EditarProductoModalComponent } from './editar-producto-modal/editar-producto-modal.component';
 import { ExcelService } from 'src/app/services/excel';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-productos-page',
@@ -24,7 +25,8 @@ import { ExcelService } from 'src/app/services/excel';
     ModalVerRecetaComponent,
     CreaRubroProductoModalComponent,
     CreaProductoModalComponent,
-    EditarProductoModalComponent
+    EditarProductoModalComponent,
+    InputTextModule
   ],
   templateUrl: './productos-page.component.html',
   styleUrls: ['./productos-page.component.scss']
@@ -35,6 +37,7 @@ export class ProductosPageComponent  implements OnInit {
   @ViewChild(CreaRubroProductoModalComponent) crearRubroProductoModal: CreaRubroProductoModalComponent | undefined;
   @ViewChild(CreaProductoModalComponent) creaProductoModal: CreaProductoModalComponent | undefined;
   @ViewChild(EditarProductoModalComponent) editarProductoModal: EditarProductoModalComponent | undefined;
+  @ViewChild('dt1') dt1: Table | undefined;
 
   productos: Producto[] = [];
 
@@ -65,6 +68,12 @@ export class ProductosPageComponent  implements OnInit {
 
   mostrarRecetaProducto(receta: string) {
     this.modalVerReceta?.mostrarReceta.next(receta);
+  }
+  clear(table: Table) {
+    table.clear();
+  }
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt1?.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
   generarExcel(){
