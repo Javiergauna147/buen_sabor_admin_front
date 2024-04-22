@@ -5,6 +5,7 @@
 </div>
 <p-divider></p-divider>
 <p-table
+    #dt1
     [value]="insumos"
     [paginator]="true"
     [rows]="5"
@@ -12,16 +13,42 @@
     [tableStyle]="{ 'min-width': '50rem' }"
     currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} insumos"
     [rowsPerPageOptions]="[5, 10, 25, 50]"
+    [globalFilterFields]="['nombre', 'denominacion', 'marca', 'rubro.nombre']"
 >
+
+<ng-template pTemplate="caption">
+    <div class="flex">
+        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+        <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar" />
+        </span>
+    </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>Nombre</th>
-            <th>Denominacion</th>
-            <th>Marca</th>
-            <th>Stock</th>
+            <th pSortableColumn="nombre">
+                Nombre
+                <p-sortIcon field="nombre"></p-sortIcon>
+            </th>
+            <th pSortableColumn="denominacion">
+                Denominacion
+                <p-sortIcon field="denominacion"></p-sortIcon>
+            </th>
+            <th pSortableColumn="marca">
+                Marca
+                <p-sortIcon field="marca"></p-sortIcon>
+            </th>
+            <th pSortableColumn="stock">
+                Stock
+                <p-sortIcon field="stock"></p-sortIcon>
+            </th>
             <th>Stock Máximo</th>
             <th>Stock Mínimo</th>
-            <th>Rubro</th>
+            <th pSortableColumn="rubro.nombre">
+                Rubro
+                <p-sortIcon field="rubro.nombre"></p-sortIcon>
+            </th>
             <th></th>
         </tr>
     </ng-template>

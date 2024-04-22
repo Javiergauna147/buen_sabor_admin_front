@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { InsumosService } from 'src/app/services/insumos/insumos.service';
@@ -10,6 +10,7 @@ import { DividerModule } from 'primeng/divider';
 import { CrearInsumoModalComponent } from './crear-insumo-modal/crear-insumo-modal.component';
 import { CrearRubroInsumoModalComponent } from './crear-rubro-insumo-modal/crear-rubro-insumo-modal.component';
 import { ExcelService } from 'src/app/services/excel';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @Component({
@@ -23,7 +24,8 @@ import { ExcelService } from 'src/app/services/excel';
     EditarInsumoModalComponent,
     DividerModule,
     CrearInsumoModalComponent,
-    CrearRubroInsumoModalComponent
+    CrearRubroInsumoModalComponent,
+    InputTextModule
   ],
   templateUrl: './insumos-page.component.html',
   styleUrls: ['./insumos-page.component.scss']
@@ -34,6 +36,8 @@ export class InsumosPageComponent implements OnInit {
   @ViewChild(EditarInsumoModalComponent) editarInsumoModal: EditarInsumoModalComponent | undefined;
   @ViewChild(CrearInsumoModalComponent) crearInsumoModal: CrearInsumoModalComponent | undefined;
   @ViewChild(CrearRubroInsumoModalComponent) crearRubroInsumoModal: CrearRubroInsumoModalComponent | undefined;
+
+  @ViewChild('dt1') dt1: Table | undefined;
 
   insumos: Insumo[] = [];
 
@@ -52,16 +56,22 @@ export class InsumosPageComponent implements OnInit {
     })
   }
 
-
+  
   editarInsumo(insumo: Insumo) {
     this.editarInsumoModal?.editarInsumo.next(insumo);
   }
-
+  
   crearInsumo(){
     this.crearInsumoModal?.crearInsumo.next();
   }
   crearRubroInsumo(){
     this.crearRubroInsumoModal?.crearRubroInsumo.next();
+  }
+  clear(table: Table) {
+    table.clear();
+  }
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt1?.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
   generarExcel(){
