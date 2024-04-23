@@ -5,6 +5,7 @@
 </div>
 <p-divider></p-divider>
 <p-table
+    #dt1
     [value]="usuarios"
     [paginator]="true"
     [rows]="5"
@@ -12,7 +13,17 @@
     [tableStyle]="{ 'min-width': '50rem' }"
     currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} insumos"
     [rowsPerPageOptions]="[5, 10, 25, 50]"
+    [globalFilterFields]="['email']"
 >
+    <ng-template pTemplate="caption">
+    <div class="flex">
+        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+        <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar" />
+        </span>
+    </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th>Email</th>

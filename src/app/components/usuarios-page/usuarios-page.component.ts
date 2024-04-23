@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
@@ -10,6 +10,7 @@ import { CrearUsuarioModalComponent } from './crear-usuario-modal/crear-usuario-
 import { CrearRolModalComponent } from './crear-rol-modal/crear-rol-modal.component';
 import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
 import { ExcelService } from 'src/app/services/excel';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-usuarios-page',
@@ -22,7 +23,8 @@ import { ExcelService } from 'src/app/services/excel';
     DividerModule,
     CrearUsuarioModalComponent,
     CrearRolModalComponent,
-    EditarUsuarioModalComponent
+    EditarUsuarioModalComponent,
+    InputTextModule
   ],
   templateUrl: './usuarios-page.component.html',
   styleUrls: ['./usuarios-page.component.scss']
@@ -32,6 +34,7 @@ export class UsuariosPageComponent implements OnInit {
   @ViewChild(CrearUsuarioModalComponent) crearUsuarioModal: CrearUsuarioModalComponent | undefined;
   @ViewChild(CrearRolModalComponent) crearRolModal: CrearRolModalComponent | undefined;
   @ViewChild(EditarUsuarioModalComponent) editarUsuarioModal: EditarUsuarioModalComponent | undefined;
+  @ViewChild('dt1') dt1: Table | undefined;
 
   usuarios: Usuario[] = [];
 
@@ -59,6 +62,14 @@ export class UsuariosPageComponent implements OnInit {
 
   crearRol() {
     this.crearRolModal?.crearRol.next();
+  }
+
+  clear(table: Table) {
+    table.clear();
+  }
+
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt1?.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
   generarExcel(){
